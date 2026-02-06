@@ -52,7 +52,7 @@ This project builds a **fully automated, reproducible pipeline** that:
 
 A scatter plot with a best-fit regression line reveals the relationship between a country's Rule of Law Index and its residents' average preference for the law-abiding choice in pedestrian-vs-pedestrian traffic-light dilemmas. Outlier countries with the largest residuals from the trend line are annotated.
 
-> **Key finding:** Pearson and Spearman correlations are computed to quantify the strength and direction of the relationship. The regression line slope, p-value, and confidence are all reported in the generated analysis report.
+> **Key finding:** While higher Rule of Law generally correlates with an increased preference for legality, the weak correlation ($r = 0.28$) and prominent outliers suggest that institutional quality is only a partial driver of legal culture.
 
 <div align="center">
   <img width="auto" height="400" alt="rule_of_law_vs_legality" src="https://github.com/user-attachments/assets/708950d7-a819-4ec3-8e13-fdeb317f2e44" />
@@ -64,31 +64,41 @@ A scatter plot with a best-fit regression line reveals the relationship between 
 
 This scatter plot examines whether countries scoring higher on Hofstede's Individualism dimension tend to favour saving the greater number of lives (utilitarian choice). A regression line is overlaid and notable outliers are labelled.
 
-> **Key finding:** Both parametric (Pearson) and non-parametric (Spearman) tests are run. The analysis report captures the correlation coefficients and their statistical significance.
+> **Key finding:** While Rule of Law shows a statistically significant relationship with legality preferences, no significant correlation ($p = 0.159$) was found between a country’s level of individualism and its utilitarian preference.
 
 <div align="center">
   <img width="auto" height="400" alt="individualism_vs_utilitarian" src="https://github.com/user-attachments/assets/f81c08cc-6858-4800-8be2-69902f121bf3" />
+  
 </div>
 
 ---
 
 ### Preference Distributions
 
-Side-by-side histograms with KDE (Kernel Density Estimation as opposed to Probablity) overlays show the cross-country distribution of Legality Preference and Utilitarian Preference. The dashed vertical line marks the global mean for each metric, making it easy to see skew and spread.
+The contrast in distributions supports a 'Nature vs. Nurture' distinction: The Utilitarian preference follows a distinct Normal distribution independent of cultural variables ($p > 0.05$), suggesting an innate, universal moral baseline. Conversely, the Legality preference deviates from normality and correlates significantly with institutional factors ($p < 0.01$), indicating it is a socially constructed trait influenced by the surrounding Rule of Law.
+
 
 <div align="center">
   <img width="auto" height="400" alt="individualism_vs_utilitarian" src="https://github.com/user-attachments/assets/91bd04a7-2b37-4c08-93ea-c5f0ecd3d2b7" />
+  <br>
+  <sub>Side-by-side histograms with KDE (Kernel Density Estimation as opposed to Probablity) overlays show the cross-country distribution of Legality Preference and Utilitarian Preference</sub>
 </div>
+
+
 
 ---
 
 ### Correlation Heatmap
 
-A four-variable correlation matrix (Rule of Law Index, Individualism Score, Mean Legality Preference, Mean Utilitarian Preference) visualised as an annotated heatmap. This provides a single-glance summary of all pairwise relationships, helping identify multicollinearity or unexpected associations.
+The correlation matrix reveals that Legality and Utilitarianism are orthogonal moral dimensions ($r = -0.11$). While institutional factors like Rule of Law and Individualism are highly inter-correlated ($r = 0.78$), they fail to predict Utilitarian preferences ($r \le 0.15$), further isolating Utilitarianism as a distinct, culture-independent variable.
 
 <div align="center">
  <img width="auto" height="400" alt="correlation_heatmap" src="https://github.com/user-attachments/assets/7e222e86-4249-4399-a4b6-0692a547299e" />
+  <br>
+  <sub>*A four-variable correlation matrix (Rule of Law Index, Individualism Score, Mean Legality Preference, Mean Utilitarian Preference) visualised as an annotated heatmap. This provides a single-glance summary of all pairwise relationships, helping identify multicollinearity or unexpected associations.*</sub>
 </div>
+
+
 
 ---
 
@@ -128,7 +138,7 @@ From the download, extract `SharedResponses.csv` (inside `SharedResponses.csv.ta
 
 ```
 Data/
-├── SharedResponses.csv          # ~500 MB+ (not committed)
+├── SharedResponses.csv          # ~10 GB+ (not committed)
 ├── RuleOfLaw.csv                # World Bank Rule of Law Index
 └── IndividualisticRanking.csv   # Hofstede Individualism Scores
 ```
@@ -178,6 +188,7 @@ All generated artifacts are written to `output/` (gitignored for clean repo hist
 ```
 COG260-Project-Moral-Machine-Analysis/
 ├── Data/
+│   ├── SharedResponses.csv ( YOU NEED TO DOWNLOAD THIS YOURSELF )
 │   ├── IndividualisticRanking.csv
 │   └── RuleOfLaw.csv
 ├── moral_machine_analysis/        # Modular analysis package
