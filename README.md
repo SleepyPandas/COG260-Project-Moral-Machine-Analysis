@@ -27,13 +27,13 @@ A data-driven investigation into how **cultural values shape moral decisions** i
 
 The [Moral Machine](https://www.moralmachine.net/) experiment (Awad et al., 2018) collected tens of millions of human judgements on ethical dilemmas facing autonomous vehicles. Each scenario forces a binary choice -- for example, swerving to save pedestrians at the cost of passengers, or obeying traffic laws versus saving more lives.
 
-This project builds a **fully automated, reproducible pipeline** that:
+This project builds a **reproducible pipeline** that:
 
 1. **Streams** the multi-GB Moral Machine CSV in memory-efficient chunks
-2. **Engineers** two behavioural metrics per country -- *Legality Preference* and *Utilitarian Preference*
+2. **Examines** two behavioural metrics per country -- *Legality Preference* and *Utilitarian Preference*
 3. **Merges** country-level preferences with external cultural indicators (Rule of Law Index, Hofstede Individualism Score)
 4. **Tests** two hypotheses with Pearson and Spearman correlations plus linear regression
-5. **Generates** publication-quality visualisations and a structured analysis report
+5. **Generates** visualisations and a structured analysis report
 
 ---
 
@@ -119,13 +119,11 @@ A horizontal bar chart of the 15 countries with the most Moral Machine responses
 | Capability | Detail |
 |-----------|--------|
 | **Large-scale data processing** | Streams multi-GB CSVs in configurable chunks (default 1 M rows) to stay within memory limits |
-| **Feature engineering** | Derives Legality and Utilitarian preference scores from raw scenario-level binary choices |
 | **Country normalisation** | Handles alternate names, casing, and schema aliases across three independent datasets |
 | **Hypothesis testing** | Pearson correlation, Spearman rank correlation, and OLS linear regression with full diagnostics |
 | **Outlier detection** | Identifies countries with the largest absolute residuals from the best-fit line |
 | **Reproducible outputs** | Every run writes timestamped metadata (Python version, pandas version, platform, config) to JSON |
-| **Publication-quality plots** | Dark-theme, high-contrast figures saved at 300 DPI, ready for reports or portfolios |
-| **Modular architecture** | Clean separation into `config`, `data_io`, `metrics`, `plots`, `reporting`, and `pipeline` modules |
+| **Modular Python Scripts** | Clean separation into `config`, `data_io`, `metrics`, `plots`, `reporting`, and `pipeline` modules |
 
 ---
 
